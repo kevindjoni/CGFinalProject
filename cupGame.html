@@ -7,12 +7,13 @@
   <script type="text/javascript" src="material.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
 <body>
   <canvas id="renderCanvas"></canvas>
   <script>
   var canvas, engine, scene, camera;
   var isMoving = null;
+
+  var cupsTotal = 3; // can be changed later
   document.addEventListener("DOMContentLoaded", function()
   {
     canvas = document.getElementById("renderCanvas");
@@ -33,7 +34,7 @@
     camera.attachControl(canvas, true);
 
     var light = new BABYLON.HemisphericLight("hLight",
-    new BABYLON.Vector3(0, 8, 0), scene);
+    new BABYLON.Vector3(-10, 8, -10), scene);
 
     var ground = createMat(scene);
     var mat = createMat(scene);
@@ -43,11 +44,28 @@
     ground.physicsImpostor = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.SphereImpostor,
       {mass: 0, restitution: 0.2, friction: 0.2}, scene);
 
-    var ball = new BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 10}, scene);
-    ball.position = new BABYLON.Vector3(0, 5, 0);
+    var ball = new BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 6}, scene);
+    ball.position = new BABYLON.Vector3(0, 3, 0);
     // ball.physicsImpostor = new BABYLON.PhysicsImpostor(ball, BABYLON.PhysicsImpostor.SphereImpostor,
     // {mass: 3, restitution: 0.5, friction: 0.2}, scene);
     ball.material = mat;
+
+    var cup = [];
+    for (var i = 0; i < cupsTotal; i++)
+    {
+      cup[i] = new BABYLON.Mesh.CreateCylinder("cup", 15, 7, 10, 32, 1 , scene)
+      cup[i].position.y = 7.5;
+      // cup[i].position.x = i + (i)*15;
+      if(i%2 == 0)
+      {
+        cup[i].position.x = (i/2) + (i/2)*15;
+      }
+      else {
+        cup[i].position.x = ((i+1)/2) - ((i+1)/2)*15;
+      }
+      cup[i].position.z = -10;
+    }
+
 
     // var box = new BABYLON.Mesh.CreateBox("box", 2.5, scene);
     // box.position = new BABYLON.Vector3(0,0,0);
