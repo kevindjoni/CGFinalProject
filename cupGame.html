@@ -5,16 +5,15 @@
   <title>Cup Game</title>
   <script type="text/javascript" src="babylon.custom.js"></script>
   <script type="text/javascript" src="material.js"></script>
+  <script type="text/javascript" src="action.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
   <canvas id="renderCanvas"></canvas>
   <script>
   var canvas, engine, scene, camera;
-  var isMoving = null;
-
-  var cupsTotal = 7; // can be changed later
-  var distanceBetweenCups = 30 // distance between cups.
+  var cupsTotal = 5; // can be changed later // number of cups
+  var cupDist = 25 // distance between cups.
   document.addEventListener("DOMContentLoaded", function()
   {
     canvas = document.getElementById("renderCanvas");
@@ -22,10 +21,6 @@
     engine = new BABYLON.Engine(canvas, true);
 
     scene = new BABYLON.Scene(engine);
-    gravity = new BABYLON.Vector3(0, -9.81, 0);
-    physicsEngine = new BABYLON.CannonJSPlugin();
-
-    scene.enablePhysics(gravity, physicsEngine);
 
     camera = new BABYLON.ArcRotateCamera("camera", 0, 0, 10, new
     BABYLON.Vector3(0, 0, 0), scene)
@@ -38,76 +33,41 @@
     new BABYLON.Vector3(-10, 8, -10), scene);
 
     var ground = createMat(scene);
-    var mat = createMat(scene);
+    // var mat = cupMat(scene);
     // var mat2 = createMat(scene);
 
     var ground = new BABYLON.Mesh.CreateGround("ground", 1000, 1000, 1, scene);
-    ground.physicsImpostor = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.SphereImpostor,
-      {mass: 0, restitution: 0.2, friction: 0.2}, scene);
 
     var ball = new BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 6}, scene);
 
-
     var cup = [];
+    var tempDist = 0;
     for (var i = 0; i < cupsTotal; i++)
     {
       cup[i] = new BABYLON.Mesh.CreateCylinder("cup", 15, 7, 10, 32, 1 , scene)
       cup[i].position.y = 7.5;
       // cup[i].position.x = i + (i)*15;
-      if(i%2 == 0)
-      {
-        cup[i].position.x = (i/2) + (i/2)*15;
+      if(i%2 == 0) {
+        cup[i].position.x = tempDist;
+        tempDist = tempDist + cupDist;
       }
       else {
-        cup[i].position.x = -1*(((i+1)/2) + ((i+1)/2)*15);
+        cup[i].position.x = -tempDist;
+
       }
-      cup[i].position.z = -10;
+      cup[i].position.z = 0;
+      cup[i].material = cupMat(scene);
+      liftCup(cup[i],true, scene);
     }
 
-    var getRandomCup = Math.floor(Math.random() * cupsTotal);
-    var posBallX = cup[getRandomCup].position.x;
+    var cupWithBall = Math.floor(Math.random() * cupsTotal);
+    var posBallX = cup[cupWithBall].position.x;
 
     ball.position = new BABYLON.Vector3(posBallX, 3, 0);
-    // ball.physicsImpostor = new BABYLON.PhysicsImpostor(ball, BABYLON.PhysicsImpostor.SphereImpostor,
-    // {mass: 3, restitution: 0.5, friction: 0.2}, scene);
-    ball.material = mat;
-
-
-    // var box = new BABYLON.Mesh.CreateBox("box", 2.5, scene);
-    // box.position = new BABYLON.Vector3(0,0,0);
-    // box.physicsImpostor = new BABYLON.PhysicsImpostor(box, BABYLON.PhysicsImpostor.BoxImpostor,
-    // {mass: 1, restitution: 0.5, friction: 0.2}, scene);
-    // box.material = mat;
+    ball.material = ballMat(scene);
 
     engine.runRenderLoop(function()
     {
-      // window.onkeydown = function(event)
-      // {
-      //   //Left
-      //   if(event.keyCode == 37 || event.keyCode == 65)
-      //   {
-      //      ball.physicsImpostor.applyImpulse(new BABYLON.Vector3(1, 0, 0),
-      //      ball.getAbsolutePosition());
-      //   }
-      //   //Up
-      //   else if(event.keyCode == 38 || event.keyCode == 87)
-      //   {
-      //      ball.physicsImpostor.applyImpulse(new BABYLON.Vector3(0, 1, 0),
-      //      ball.getAbsolutePosition());
-      //   }
-      //   //Right
-      //   else if(event.keyCode == 39 || event.keyCode == 68)
-      //   {
-      //     ball.physicsImpostor.applyImpulse(new BABYLON.Vector3(-1, 0, 0),
-      //     ball.getAbsolutePosition());
-      //   }
-      //   //Down
-      //   else if(event.keyCode == 40 || event.keyCode == 83)
-      //   {
-      //     ball.physicsImpostor.applyImpulse(new BABYLON.Vector3(0, -1, 0),
-      //     ball.getAbsolutePosition());
-      //   }
-      // }
       scene.render();
     });
   });
