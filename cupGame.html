@@ -13,7 +13,8 @@
   var canvas, engine, scene, camera;
   var isMoving = null;
 
-  var cupsTotal = 3; // can be changed later
+  var cupsTotal = 7; // can be changed later
+  var distanceBetweenCups = 30 // distance between cups.
   document.addEventListener("DOMContentLoaded", function()
   {
     canvas = document.getElementById("renderCanvas");
@@ -40,15 +41,12 @@
     var mat = createMat(scene);
     // var mat2 = createMat(scene);
 
-    var ground = new BABYLON.Mesh.CreateGround("ground", 100, 100, 1, scene);
+    var ground = new BABYLON.Mesh.CreateGround("ground", 1000, 1000, 1, scene);
     ground.physicsImpostor = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.SphereImpostor,
       {mass: 0, restitution: 0.2, friction: 0.2}, scene);
 
     var ball = new BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 6}, scene);
-    ball.position = new BABYLON.Vector3(0, 3, 0);
-    // ball.physicsImpostor = new BABYLON.PhysicsImpostor(ball, BABYLON.PhysicsImpostor.SphereImpostor,
-    // {mass: 3, restitution: 0.5, friction: 0.2}, scene);
-    ball.material = mat;
+
 
     var cup = [];
     for (var i = 0; i < cupsTotal; i++)
@@ -61,10 +59,18 @@
         cup[i].position.x = (i/2) + (i/2)*15;
       }
       else {
-        cup[i].position.x = ((i+1)/2) - ((i+1)/2)*15;
+        cup[i].position.x = -1*(((i+1)/2) + ((i+1)/2)*15);
       }
       cup[i].position.z = -10;
     }
+
+    var getRandomCup = Math.floor(Math.random() * cupsTotal);
+    var posBallX = cup[getRandomCup].position.x;
+
+    ball.position = new BABYLON.Vector3(posBallX, 3, 0);
+    // ball.physicsImpostor = new BABYLON.PhysicsImpostor(ball, BABYLON.PhysicsImpostor.SphereImpostor,
+    // {mass: 3, restitution: 0.5, friction: 0.2}, scene);
+    ball.material = mat;
 
 
     // var box = new BABYLON.Mesh.CreateBox("box", 2.5, scene);
