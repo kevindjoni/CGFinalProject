@@ -14,6 +14,7 @@
   var canvas, engine, scene, camera;
   var cupsTotal = 5; // can be changed later // number of cups
   var cupDist = 25 // distance between cups.
+  var shuffleNumber = 10; // number of times cup shuffle
   document.addEventListener("DOMContentLoaded", function()
   {
     canvas = document.getElementById("renderCanvas");
@@ -61,10 +62,15 @@
     }
 
     var cupWithBall = Math.floor(Math.random() * cupsTotal);
-    var posBallX = cup[cupWithBall].position.x;
+    // var posBallX = cup[cupWithBall].position.x;
 
-    ball.position = new BABYLON.Vector3(posBallX, 3, 0);
+    // ball.position = new BABYLON.Vector3(posBallX, 3, 0);
+    ball.position = cup[cupWithBall].position.clone();
+    ball.position.y = 3;
     ball.material = ballMat(scene);
+
+    shuffleCup(cup, shuffleNumber, ball,)
+
 
     engine.runRenderLoop(function()
     {
