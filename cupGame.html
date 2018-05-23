@@ -14,7 +14,7 @@
   var canvas, engine, scene, camera;
   var cupsTotal = 5; // can be changed later // number of cups
   var cupDist = 25 // distance between cups.
-  var shuffleNumber = 10; // number of times cup shuffle
+  var shuffleNumber = 5; // number of times cup shuffle
   document.addEventListener("DOMContentLoaded", function()
   {
     canvas = document.getElementById("renderCanvas");
@@ -58,7 +58,10 @@
       }
       cup[i].position.z = 0;
       cup[i].material = cupMat(scene);
-      liftCup(cup[i],true, scene);
+      // liftCup(cup[i],true, scene, function() {
+      //   shuffleCup(cup, shuffleNumber, ball, cupDist, scene);
+      // });
+
     }
 
     var cupWithBall = Math.floor(Math.random() * cupsTotal);
@@ -69,7 +72,9 @@
     ball.position.y = 3;
     ball.material = ballMat(scene);
 
-    shuffleCup(cup, shuffleNumber, ball,)
+    liftCup(cup[cupWithBall], true, scene, function () {
+      shuffleCup(cup, shuffleNumber, ball, cupDist, scene);
+    });
 
 
     engine.runRenderLoop(function()
