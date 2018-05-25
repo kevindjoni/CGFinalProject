@@ -38,6 +38,99 @@ function liftCup(cup, goDown, scene, callfunction)
   scene.beginAnimation(cup, 0, x, false , 1, callfunction);
 }
 
+function revealAllCup(cup, scene)
+{
+  for(var i= 0; i< cup.length;i++)
+  {
+    liftCup(cup[i], false, scene);
+  }
+}
+
+function putDown(cup, scene, call)
+{
+  var animationBox = new BABYLON.Animation(
+		"liftCup",
+		"position.y",
+		50,
+		BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+		BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+	);
+
+  var keys = [];
+
+  keys.push({
+    frame: 0,
+    value: 15
+  });
+
+  keys.push({
+    frame: 30,
+    value: 7.5
+  });
+
+  animationBox.setKeys(keys);
+
+  cup.animations = [];
+  cup.animations.push(animationBox);
+
+  scene.beginAnimation(cup, 0, 30, false , 1, call);
+}
+
+function hideCup(cup,ball,scene,callback)
+{
+  for(var j=0; j< cup.length; j++)
+  {
+    if(j == cup.length -1)
+    {
+      putDown(cup[j], scene, callback);
+    }
+    else
+    {
+      putDown(cup[j], scene);
+    }
+  }
+}
+
+function disableClicking(cup,scene)
+{
+  for(var i= 0; i< cup.length;i++)
+  {
+    cup[i].actionManager = new BABYLON.ActionManager(scene);
+  }
+}
+
+function clickable(cup, ball, scene)
+{
+  for(var i=0; i< cup.length; i++)
+  {
+    cup[i].actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnLeftPickTrigger, function (e) {
+      disableClicking(cup,scene);
+      revealAllCup(cup, scene);
+      setTimeout( function() {
+        if(e.meshUnderPointer.position.x == ball.position.x)
+        {
+          alert('great job');
+          score++;
+          cupWithBall = Math.floor(Math.random() * cupsTotal);
+          ball.position = cup[cupWithBall].position.clone();
+          ball.position.y = 3;
+          hideCup( cup , ball, scene, function() {
+            // shuffleCup(cup, shuffleNumber, ball, cupDist, scene);
+            liftCup(cup[cupWithBall] , true, scene, function () {
+              shuffleCup(cup, shuffleNumber, ball, cupDist, scene);
+            });
+          });
+        }
+        else
+        {
+          alert('false cup');
+          alert('Your Final score is: ' + score);
+        }
+      }, 1000);
+    }));
+  }
+}
+
 function cupRotation(cup, posCup, movement, scene, back)
 {
   // movement is going square like
@@ -137,5 +230,7 @@ function shuffleCup(cup, shuffleNumber, ball, length, scene)
   } else {
     ball.visibility =1;
     ball.position = cup[cupWithBall].position.clone();
+    ball.position.y = 3;
+    clickable(cup,ball,scene);
   }
 }
