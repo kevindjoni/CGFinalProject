@@ -6,15 +6,16 @@
   <script type="text/javascript" src="babylon.custom.js"></script>
   <script type="text/javascript" src="material.js"></script>
   <script type="text/javascript" src="action.js"></script>
+  <script type="text/javascript" src="global.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
   <canvas id="renderCanvas"></canvas>
   <script>
   var canvas, engine, scene, camera;
-  var cupsTotal = 5; // can be changed later // number of cups
-  var cupDist = 25 // distance between cups.
-  var shuffleNumber = 5; // number of times cup shuffle
+  // var cupsTotal = 5; // can be changed later // number of cups
+  // var cupDist = 25 // distance between cups.
+  // var shuffleNumber = 10; // number of times cup shuffle
   document.addEventListener("DOMContentLoaded", function()
   {
     canvas = document.getElementById("renderCanvas");
@@ -58,19 +59,13 @@
       }
       cup[i].position.z = 0;
       cup[i].material = cupMat(scene);
-      // liftCup(cup[i],true, scene, function() {
-      //   shuffleCup(cup, shuffleNumber, ball, cupDist, scene);
-      // });
-
+      cup[i].actionManager = new BABYLON.ActionManager(scene);
     }
 
-    var cupWithBall = Math.floor(Math.random() * cupsTotal);
-    // var posBallX = cup[cupWithBall].position.x;
-
-    // ball.position = new BABYLON.Vector3(posBallX, 3, 0);
     ball.position = cup[cupWithBall].position.clone();
     ball.position.y = 3;
     ball.material = ballMat(scene);
+
 
     liftCup(cup[cupWithBall], true, scene, function () {
       shuffleCup(cup, shuffleNumber, ball, cupDist, scene);

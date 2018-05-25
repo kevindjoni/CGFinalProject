@@ -136,5 +136,6 @@ function shuffleCup(cup, shuffleNumber, ball, length, scene)
     });
   } else {
     ball.visibility =1;
+    ball.position = cup[cupWithBall].position.clone();
   }
 }
