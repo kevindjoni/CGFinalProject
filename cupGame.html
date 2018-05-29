@@ -27,7 +27,9 @@
     camera = new BABYLON.ArcRotateCamera("camera", 0, 0, 10, new
     BABYLON.Vector3(0, 0, 0), scene)
 
-    camera.setPosition(new BABYLON.Vector3(0, 40, 100));
+    camera.setPosition(new BABYLON.Vector3(0, 60, 100));
+    camera.setPosition(new BABYLON.Vector3(0, 100, 100));
+    //camera moves from point (0, 100, 100) -> (0, 60, 100)
 
     camera.attachControl(canvas, true);
 
@@ -38,7 +40,7 @@
     // var mat = cupMat(scene);
     // var mat2 = createMat(scene);
 
-    var ground = new BABYLON.Mesh.CreateGround("ground", 1000, 1000, 1, scene);
+    var ground = new BABYLON.Mesh.CreateGround("ground", 150, 75, 1, scene);
 
     var ball = new BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 6}, scene);
 
