@@ -7,28 +7,30 @@
   <script type="text/javascript" src="material.js"></script>
   <script type="text/javascript" src="action.js"></script>
   <script type="text/javascript" src="global.js"></script>
+  <!-- <script src="https://cdn.babylonjs.com/babylon.js"></script> -->
+  <script src="https://cdn.babylonjs.com/2-5/babylon.max.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
   <canvas id="renderCanvas"></canvas>
   <script>
-  var canvas, engine, scene, camera;
-  // var cupsTotal = 5; // can be changed later // number of cups
-  // var cupDist = 25 // distance between cups.
-  // var shuffleNumber = 10; // number of times cup shuffle
+    var canvas, engine, scene, camera;
+  // var cupsTotal = 5; // Number of Cups (can be changed later)
+  // var cupDist = 25 // Distance between cups.
+  // var shuffleNumber = 10; // Number of times cup shuffle
   document.addEventListener("DOMContentLoaded", function()
   {
     canvas = document.getElementById("renderCanvas");
-
     engine = new BABYLON.Engine(canvas, true);
-
     scene = new BABYLON.Scene(engine);
+
+    engine.enableOfflineSupport = false;
 
     camera = new BABYLON.ArcRotateCamera("camera", 0, 0, 10, new
     BABYLON.Vector3(0, 0, 0), scene)
 
     camera.setPosition(new BABYLON.Vector3(0, 60, 100));
-    camera.setPosition(new BABYLON.Vector3(0, 100, 100));
+    // camera.setPosition(new BABYLON.Vector3(0, 100, 100));
     //camera moves from point (0, 100, 100) -> (0, 60, 100)
 
     camera.attachControl(canvas, true);
@@ -36,11 +38,19 @@
     var light = new BABYLON.HemisphericLight("hLight",
     new BABYLON.Vector3(-10, 8, -10), scene);
 
-    var ground = createMat(scene);
-    // var mat = cupMat(scene);
-    // var mat2 = createMat(scene);
+    // var ground = createMat(scene);
+    var table = createMat(scene);
 
-    var ground = new BABYLON.Mesh.CreateGround("ground", 150, 75, 1, scene);
+    // var table = new BABYLON.Mesh.CreateGround("table", 150, 100, 1, scene);
+    BABYLON.SceneLoader.ImportMesh("", "", "tablemarble.babylon", scene,
+    function (newMeshes){
+      // newMeshes.forEach(function(mesh){
+      //   mesh.rotation =  new BABYLON.Vector3(
+      //     BABYLON.Tools.ToRadians(45),
+      //     0,
+      //     0);
+      // })
+    });
 
     var ball = new BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 6}, scene);
 
@@ -68,11 +78,9 @@
     ball.position.y = 3;
     ball.material = ballMat(scene);
 
-
     liftCup(cup[cupWithBall] , true, scene, function () {
       shuffleCup(cup, shuffleNumber, ball, cupDist, scene);
     });
-
 
     engine.runRenderLoop(function()
     {

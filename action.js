@@ -22,7 +22,8 @@ function liftCup(cup, goDown, scene, callfunction)
 
   // needed if the lift is for first Scene
   // or when try to answer the cup.
-  if(goDown) {
+  if(goDown)
+  {
     keys.push({
       frame: 60,
       value: 7.5
@@ -228,7 +229,7 @@ function shuffleCup(cup, shuffleNumber, ball, length, scene)
       shuffleCup(cup, shuffleNumber, ball, length, scene);
     });
   } else {
-    ball.visibility =1;
+    ball.visibility = 1;
     ball.position = cup[cupWithBall].position.clone();
     ball.position.y = 3;
     clickable(cup,ball,scene);
