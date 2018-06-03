@@ -15,9 +15,7 @@
   <canvas id="renderCanvas"></canvas>
   <script>
     var canvas, engine, scene, camera;
-  // var cupsTotal = 5; // Number of Cups (can be changed later)
-  // var cupDist = 25 // Distance between cups.
-  // var shuffleNumber = 10; // Number of times cup shuffle
+
   document.addEventListener("DOMContentLoaded", function()
   {
     canvas = document.getElementById("renderCanvas");
@@ -29,28 +27,27 @@
     camera = new BABYLON.ArcRotateCamera("camera", 0, 0, 10, new
     BABYLON.Vector3(0, 0, 0), scene)
 
-    camera.setPosition(new BABYLON.Vector3(0, 60, 100));
-    // camera.setPosition(new BABYLON.Vector3(0, 100, 100));
-    //camera moves from point (0, 100, 100) -> (0, 60, 100)
+    camera.setPosition(new BABYLON.Vector3(0, 90, 150));
+    // camera.setPosition(new BABYLON.Vector3(0, 150, 150));
+    //camera moves from point (0, 150, 150) -> (0, 90, 150)
 
     camera.attachControl(canvas, true);
 
     var light = new BABYLON.HemisphericLight("hLight",
-    new BABYLON.Vector3(-10, 8, -10), scene);
+    new BABYLON.Vector3(10, 8, -10), scene);
 
-    // var ground = createMat(scene);
     var table = createMat(scene);
 
-    // var table = new BABYLON.Mesh.CreateGround("table", 150, 100, 1, scene);
+    function setup(mesh){
+      mesh.scaling = new BABYLON.Vector3(100, 100, 100);
+    }
+
     BABYLON.SceneLoader.ImportMesh("", "", "tablemarble.babylon", scene,
-    function (newMeshes){
-      // newMeshes.forEach(function(mesh){
-      //   mesh.rotation =  new BABYLON.Vector3(
-      //     BABYLON.Tools.ToRadians(45),
-      //     0,
-      //     0);
-      // })
-    });
+    function(newMeshes){
+        var table = newMeshes[0];
+        setup(table);
+        table.position = (new BABYLON.Vector3(0, -58, 0));
+      });
 
     var ball = new BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 6}, scene);
 

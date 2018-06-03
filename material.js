@@ -2,7 +2,6 @@ function createMat(scene)
 {
   var mat = new BABYLON.StandardMaterial("material", scene);
 
-  //Ball Colour etc.
   mat.diffuseColor = new BABYLON.Color3(1, 0, 0);
   mat.specularColor = new BABYLON.Color3(0, 0.5, 1);
   mat.specularPower = 50;
@@ -17,7 +16,7 @@ function ballMat(scene)
 {
     var mat = new BABYLON.StandardMaterial("material", scene);
 
-    mat.diffuseColor = new BABYLON.Color3(1,1,0);
+    mat.diffuseColor = new BABYLON.Color3(1,5,0);
     mat.specularColor = new BABYLON.Color3(0,1,0);
     mat.specularPower = 25;
 

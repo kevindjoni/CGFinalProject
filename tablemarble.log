@@ -8,19 +8,19 @@ Exporter version: 5.6.3, Blender version: 2.79 (sub 0)
 		UVs Precision       :  3
 		Vert Color Precision:  3
 		Mat Weight Precision:  2
-		texture directory   :  C:\Users\User\Desktop\GitKraken\CGFinalProject\
+		texture directory   :  C:\Users\User\Desktop\GitKraken\
 	Python World class constructor completed
 	WARNING: No active camera has been assigned, or is not in a currently selected Blender layer
-	processing begun of mesh:  Table Marble
-		processing begun of baked material:  Table Marble
-			Cycles baking texture, type: NORMAL, mapped using: UVMap
-		num positions      :  518
-		num normals        :  518
-		num uvs            :  1036
+	processing begun of mesh:  Table_Marble_Plane
+		processing begun of baked material:  Table_Marble_Plane
+			Cycles baking texture, type: DIFFUSE, mapped using: UVMap
+		num positions      :  538
+		num normals        :  538
+		num uvs            :  1076
 		num uvs2           :  0
 		num colors         :  0
 		num indices        :  1014
 ========= Writing of scene file started =========
 ========= Writing of scene file completed =========
 ========= end of processing =========
-elapsed time:  0 min, 1.7126 secs
+elapsed time:  0 min, 45.8423 secs

@@ -124,7 +124,7 @@ function clickable(cup, ball, scene)
         }
         else
         {
-          alert('false cup');
+          alert('Wrong Cup');
           alert('Your Final score is: ' + score);
         }
       }, 1000);
