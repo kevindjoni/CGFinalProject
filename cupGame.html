@@ -7,7 +7,6 @@
   <script type="text/javascript" src="material.js"></script>
   <script type="text/javascript" src="action.js"></script>
   <script type="text/javascript" src="global.js"></script>
-  <!-- <script src="https://cdn.babylonjs.com/babylon.js"></script> -->
   <script src="https://cdn.babylonjs.com/2-5/babylon.max.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -34,21 +33,15 @@
     camera.attachControl(canvas, true);
 
     var light = new BABYLON.HemisphericLight("hLight",
-    new BABYLON.Vector3(10, 2, 5), scene);
-    light.intensity = 0.5;
+    new BABYLON.Vector3(0, 90, 0), scene);
+    light.intensity = 10;
 
     var table = createMat(scene);
-    // var attic = createMat(scene);
+    var cabin = BABYLON.MeshBuilder.CreateBox("cabin", 1.0, scene);
 
     function setup(mesh)
     {
       mesh.scaling = new BABYLON.Vector3(100, 100, 100);
-    }
-
-    function setup1(mesh)
-    {
-      mesh.scaling = new BABYLON.Vector3(180, 180, 180);
-      // mesh.position = new BABYLON.Vector3(0,100,0);
     }
 
     BABYLON.SceneLoader.ImportMesh("", "", "tablemarble.babylon", scene,
@@ -58,37 +51,18 @@
         table.position = (new BABYLON.Vector3(0, -58, 0));
       });
 
-    BABYLON.SceneLoader.ImportMesh("", "", "attic.babylon", scene,
-    function(newMeshes){
-        var attic = newMeshes[1];
-        // var attic1 = newMeshes[2];
-        setup1(attic);
-        setup1(attic1);
-        attic.position = (new BABYLON.Vector3(0, 100, 0));
-        attic1.position = (new BABYLON.Vector3(0, 100, 0));
-      });
+    BABYLON.SceneLoader.ImportMesh("", "", "newCabinWithTexture.obj", scene, function(newMeshes)
+    {
+      for(i = 0; i < newMeshes.length; i++)
+      {
+        newMeshes[i].parent = cabin;
+      }
+      cabin.isVisible = false;
+    });
 
     var ball = new BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 6}, scene);
 
-    var cup = [];
-    var tempDist = 0;
-    for (var i = 0; i < cupsTotal; i++)
-    {
-      cup[i] = new BABYLON.Mesh.CreateCylinder("cup", 15, 7, 10, 32, 1 , scene)
-      cup[i].position.y = 7.5;
-      // cup[i].position.x = i + (i)*15;
-      if(i%2 == 0) {
-        cup[i].position.x = tempDist;
-        tempDist = tempDist + cupDist;
-      }
-      else {
-        cup[i].position.x = -tempDist;
-
-      }
-      cup[i].position.z = 0;
-      cup[i].material = cupMat(scene);
-      cup[i].actionManager = new BABYLON.ActionManager(scene);
-    }
+    createCup();
 
     ball.position = cup[cupWithBall].position.clone();
     ball.position.y = 3;

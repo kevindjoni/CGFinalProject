@@ -47,6 +47,26 @@ function revealAllCup(cup, scene)
   }
 }
 
+function createCup()
+{
+  for (var i = 0; i < cupsTotal; i++)
+  {
+    cup[i] = new BABYLON.Mesh.CreateCylinder("cup", 15, 7, 10, 32, 1 , scene);
+    cup[i].position.y = 7.5;
+    // cup[i].position.x = i + (i)*15;
+    if(i%2 == 0) {
+      cup[i].position.x = tempDist;
+      tempDist = tempDist + cupDist;
+    }
+    else {
+      cup[i].position.x = -tempDist;
+    }
+    cup[i].position.z = 0;
+    cup[i].material = cupMat(scene);
+    cup[i].actionManager = new BABYLON.ActionManager(scene);
+  }
+}
+
 function putDown(cup, scene, call)
 {
   var animationBox = new BABYLON.Animation(
@@ -79,7 +99,7 @@ function putDown(cup, scene, call)
 
 function hideCup(cup,ball,scene,callback)
 {
-  for(var j=0; j< cup.length; j++)
+  for(var j=0; j < cup.length; j++)
   {
     if(j == cup.length -1)
     {
@@ -100,6 +120,50 @@ function disableClicking(cup,scene)
   }
 }
 
+function createNewCup(diff)
+{
+  var len = cup.length;
+  for (var j=0; j< diff;j++)
+  {
+    cup[len+j] = new BABYLON.Mesh.CreateCylinder("cup", 15, 7, 10, 32, 1 , scene);
+    if(cupsTotal%2 == 0)
+    {
+      if(j%2 == 0) {
+        cup[len+j].position.x = -tempDist;
+      } else {
+        cup[len+j].position.x = tempDist;
+        tempDist = tempDist + cupDist;
+      }
+    } else {
+      if(j%2 == 1) {
+        cup[len+j].position.x = -tempDist;
+      } else {
+        cup[len+j].position.x = tempDist;
+        tempDist = tempDist + cupDist;
+      }
+    }
+    cup[len+j].position.y = 7.5;
+    cup[len+j].position.z = 0;
+    cup[len+j].material = cupMat(scene);
+    cup[len+j].actionManager = new BABYLON.ActionManager(scene);
+  }
+}
+
+function newEnvironment(call)
+{
+  if(score > 10)
+  {
+    cupsTotal += 2;
+    createNewCup(2);
+    shuffleNumber += 2;
+  }
+  if(score % 3 == 0)
+  {
+    speed += 2;
+  }
+  call();
+}
+
 function clickable(cup, ball, scene)
 {
   for(var i=0; i< cup.length; i++)
@@ -110,13 +174,17 @@ function clickable(cup, ball, scene)
       setTimeout( function() {
         if(e.meshUnderPointer.position.x == ball.position.x)
         {
-          alert('great job');
+          alert('Well Done!');
           score++;
-          cupWithBall = Math.floor(Math.random() * cupsTotal);
-          ball.position = cup[cupWithBall].position.clone();
-          ball.position.y = 3;
-          hideCup( cup , ball, scene, function() {
+          hideCup( cup , ball, scene, function()
+          {
+            newEnvironment( function()
+            {
+              cupWithBall = Math.floor(Math.random() * cupsTotal);
+            });
             // shuffleCup(cup, shuffleNumber, ball, cupDist, scene);
+            ball.position = cup[cupWithBall].position.clone();
+            ball.position.y = 3;
             liftCup(cup[cupWithBall] , true, scene, function () {
               shuffleCup(cup, shuffleNumber, ball, cupDist, scene);
             });
@@ -126,6 +194,7 @@ function clickable(cup, ball, scene)
         {
           alert('Wrong Cup');
           alert('Your Final score is: ' + score);
+          alert('Thank You for Playing!');
         }
       }, 1000);
     }));
@@ -151,7 +220,9 @@ function cupRotation(cup, posCup, movement, scene, back)
   if(movement == 'back')
   {
     cupPos2.z = 5;
-  } else {
+  }
+  else
+  {
     cupPos2.z = -5;
   }
 
@@ -185,7 +256,7 @@ function cupRotation(cup, posCup, movement, scene, back)
   cup.animations = [];
   cup.animations.push(animationBox);
 
-  scene.beginAnimation(cup, 0, 60,false, 5, back);
+  scene.beginAnimation(cup, 0, 60,false, speed, back);
 }
 
 function switchCup(cup1, cup2, ball, scene, callfunction)
