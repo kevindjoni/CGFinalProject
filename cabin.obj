@@ -1,6 +1,6 @@
 # Blender v2.79 (sub 0) OBJ File: 'cabin.blend'
 # www.blender.org
-mtllib cabinToUse.mtl
+mtllib cabin.mtl
 o ShedOutside.001
 v -2.809844 4.175344 4.302391
 v 2.809844 4.175344 4.302391

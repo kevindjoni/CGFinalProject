@@ -22,8 +22,7 @@ function liftCup(cup, goDown, scene, callfunction)
 
   // needed if the lift is for first Scene
   // or when try to answer the cup.
-  if(goDown)
-  {
+  if(goDown){
     keys.push({
       frame: 60,
       value: 7.5
@@ -164,6 +163,26 @@ function newEnvironment(call)
   call();
 }
 
+function makeScoreBoard()
+{
+  outputplane = BABYLON.Mesh.CreatePlane("outputplane", 25, scene, false);
+  outputplane.billboardMode = BABYLON.AbstractMesh.BILLBOARDMODE_ALL;
+  outputplane.material = new BABYLON.StandardMaterial("outputplane", scene);
+  outputplane.position = new BABYLON.Vector3(0, 75, -20);
+  outputplane.scaling.x = 2.5;
+  outputplane.scaling.y = 2.5;
+
+  outputplaneTexture = new BABYLON.DynamicTexture("dynamic texture", 512, scene, true);
+  outputplane.material.diffuseTexture = outputplaneTexture;
+  outputplane.material.specularColor = new BABYLON.Color3(0, 0, 0);
+  outputplane.material.emissiveColor = new BABYLON.Color3(1, 1, 1);
+  outputplane.material.backFaceCulling = false;
+  // outputplaneTexture.getContext().clearRect(0, 140, 512, 512);
+  outputplaneTexture.drawText("Score: " + score, null, 180, "bold 120px verdana", "white");
+
+  outputplaneTexture.hasAlpha = true;
+}
+
 function clickable(cup, ball, scene)
 {
   for(var i=0; i< cup.length; i++)
@@ -181,6 +200,8 @@ function clickable(cup, ball, scene)
             newEnvironment( function()
             {
               cupWithBall = Math.floor(Math.random() * cupsTotal);
+              outputplane.dispose();
+              makeScoreBoard();
             });
             // shuffleCup(cup, shuffleNumber, ball, cupDist, scene);
             ball.position = cup[cupWithBall].position.clone();

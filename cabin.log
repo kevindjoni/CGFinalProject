@@ -1,0 +1,56 @@
+Exporter version: 5.6.3, Blender version: 2.79 (sub 0)
+========= Conversion from Blender to Babylon.js =========
+	Scene settings used :
+		export scope        :  ALL
+		inline textures     :  false
+		Positions Precision :  4
+		Normals Precision   :  3
+		UVs Precision       :  3
+		Vert Color Precision:  3
+		Mat Weight Precision:  2
+		texture directory   :  C:\Users\User\Desktop\GitKraken\CGFinalProject\
+	Python World class constructor completed
+	processing begun of camera (UniversalCamera):  Camera
+	processing begun of mesh:  ShedOutside.001
+		processing begun of baked material:  ShedOutside.001
+			Cycles baking texture, type: DIFFUSE, mapped using: UVMap
+		num positions      :  3541
+		num normals        :  3541
+		num uvs            :  7082
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  19251
+		WARNING: # of 0 area faces found:  160
+	processing begun of mesh:  Roof.001
+		processing begun of baked material:  Roof.001
+			Cycles baking texture, type: DIFFUSE, mapped using: UVMap
+		num positions      :  1658
+		num normals        :  1658
+		num uvs            :  3316
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  2274
+		WARNING: # of 0 area faces found:  2
+	processing begun of mesh:  InsideShed.001
+		processing begun of baked material:  InsideShed.001
+			Cycles baking texture, type: DIFFUSE, mapped using: UVMap
+		num positions      :  1142
+		num normals        :  1142
+		num uvs            :  2284
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  3537
+	processing begun of mesh:  InsideCeiling.001
+		processing begun of baked material:  InsideCeiling.001
+			Cycles baking texture, type: DIFFUSE, mapped using: UVMap
+		num positions      :  16
+		num normals        :  16
+		num uvs            :  32
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  42
+	processing begun of light (SUN):  Sun
+========= Writing of scene file started =========
+========= Writing of scene file completed =========
+========= end of processing =========
+elapsed time:  15 min, 33.0205 secs
