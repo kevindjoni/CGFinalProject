@@ -142,14 +142,16 @@ function createNewCup(diff)
 
 function newEnvironment(call)
 {
-  if(score == 3)
+  if(score > 5)
   {
+    alert("More Cups!");
     cupsTotal += 2;
     createNewCup(2);
     shuffleNumber += 2;
   }
   if(score % 3 == 0)
   {
+    alert("Speed Increased!");
     speed += 0.5;
   }
   call();
@@ -180,7 +182,8 @@ function clickable(cup, ball, scene)
 {
   for(var i=0; i< cup.length; i++)
   {
-    cup[i].actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnLeftPickTrigger, function (e) {
+    cup[i].actionManager.registerAction(new BABYLON.ExecuteCodeAction(
+      BABYLON.ActionManager.OnLeftPickTrigger, function (e) {
       disableClicking(cup,scene);
       revealAllCup(cup, scene);
       setTimeout( function() {

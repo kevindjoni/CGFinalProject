@@ -17,7 +17,7 @@
 
   document.addEventListener("DOMContentLoaded", function()
   {
-    // window.alert('Guess the correct Cup with the ball');
+    window.alert('Guess the correct Cup!');
     canvas = document.getElementById("renderCanvas");
     engine = new BABYLON.Engine(canvas, true);
     scene = new BABYLON.Scene(engine);
@@ -84,7 +84,8 @@
     ball.position.y = 3;
     ball.material = ballMat(scene);
 
-    liftCup(cup[cupWithBall] , true, scene, function () {
+    liftCup(cup[cupWithBall] , true, scene, function ()
+    {
       shuffleCup(cup, shuffleNumber, ball, cupDist, scene);
     });
 
