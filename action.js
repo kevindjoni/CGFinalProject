@@ -142,7 +142,7 @@ function createNewCup(diff)
 
 function newEnvironment(call)
 {
-  if(score > 5)
+  if(score = 10)
   {
     alert("More Cups!");
     cupsTotal += 2;
