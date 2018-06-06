@@ -11,9 +11,22 @@ Exporter version: 5.6.3, Blender version: 2.79 (sub 0)
 		texture directory   :  C:\Users\User\Desktop\GitKraken\CGFinalProject\
 	Python World class constructor completed
 	processing begun of camera (UniversalCamera):  Camera
+	processing begun of mesh:  InsideShed.001
+		processing begun of Standard material:  Material.002
+			Diffuse texture found "Texture.002"
+				Image texture found, type:  diffuseTexture, mapped using: "UVMap"
+	WARNING: Error encountered processing image file:  , Error:  'C:\\Users\\User\\Desktop\\GitKraken\\CGFinalProject\\wall3.jpg' and 'C:\\Users\\User\\Desktop\\GitKraken\\CGFinalProject\\wall3.jpg' are the same file
+		num positions      :  1142
+		num normals        :  1142
+		num uvs            :  2284
+		num uvs2           :  0
+		num colors         :  0
+		num indices        :  3537
 	processing begun of mesh:  ShedOutside.001
-		processing begun of baked material:  ShedOutside.001
-			Cycles baking texture, type: DIFFUSE, mapped using: UVMap
+		processing begun of Standard material:  Material.001
+			Diffuse texture found "Texture.001"
+				Image texture found, type:  diffuseTexture, mapped using: "UVMap"
+	WARNING: Error encountered processing image file:  , Error:  'C:\\Users\\User\\Desktop\\GitKraken\\CGFinalProject\\wall2.jpg' and 'C:\\Users\\User\\Desktop\\GitKraken\\CGFinalProject\\wall2.jpg' are the same file
 		num positions      :  3541
 		num normals        :  3541
 		num uvs            :  7082
@@ -22,35 +35,19 @@ Exporter version: 5.6.3, Blender version: 2.79 (sub 0)
 		num indices        :  19251
 		WARNING: # of 0 area faces found:  160
 	processing begun of mesh:  Roof.001
-		processing begun of baked material:  Roof.001
-			Cycles baking texture, type: DIFFUSE, mapped using: UVMap
-		num positions      :  1658
-		num normals        :  1658
-		num uvs            :  3316
+		processing begun of Standard material:  Material
+			Diffuse texture found "Texture"
+				Image texture found, type:  diffuseTexture, mapped using: "UVMap"
+	WARNING: Error encountered processing image file:  , Error:  'C:\\Users\\User\\Desktop\\GitKraken\\CGFinalProject\\roof2.jpg' and 'C:\\Users\\User\\Desktop\\GitKraken\\CGFinalProject\\roof2.jpg' are the same file
+		num positions      :  3604
+		num normals        :  3604
+		num uvs            :  7208
 		num uvs2           :  0
 		num colors         :  0
-		num indices        :  2274
+		num indices        :  5484
 		WARNING: # of 0 area faces found:  2
-	processing begun of mesh:  InsideShed.001
-		processing begun of baked material:  InsideShed.001
-			Cycles baking texture, type: DIFFUSE, mapped using: UVMap
-		num positions      :  1142
-		num normals        :  1142
-		num uvs            :  2284
-		num uvs2           :  0
-		num colors         :  0
-		num indices        :  3537
-	processing begun of mesh:  InsideCeiling.001
-		processing begun of baked material:  InsideCeiling.001
-			Cycles baking texture, type: DIFFUSE, mapped using: UVMap
-		num positions      :  16
-		num normals        :  16
-		num uvs            :  32
-		num uvs2           :  0
-		num colors         :  0
-		num indices        :  42
 	processing begun of light (SUN):  Sun
 ========= Writing of scene file started =========
 ========= Writing of scene file completed =========
 ========= end of processing =========
-elapsed time:  15 min, 33.0205 secs
+elapsed time:  0 min, 1.0453 secs

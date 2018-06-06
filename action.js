@@ -125,21 +125,13 @@ function createNewCup(diff)
   for (var j=0; j< diff;j++)
   {
     cup[len+j] = new BABYLON.Mesh.CreateCylinder("cup", 15, 7, 10, 32, 1 , scene);
-    if(cupsTotal%2 == 0)
-    {
-      if(j%2 == 0) {
-        cup[len+j].position.x = -tempDist;
-      } else {
-        cup[len+j].position.x = tempDist;
-        tempDist = tempDist + cupDist;
-      }
-    } else {
-      if(j%2 == 1) {
-        cup[len+j].position.x = -tempDist;
-      } else {
-        cup[len+j].position.x = tempDist;
-        tempDist = tempDist + cupDist;
-      }
+    var num = len+j;
+    if(num%2 == 0) {
+      cup[len+j].position.x = tempDist;
+      tempDist = tempDist + cupDist;
+    }
+    else {
+      cup[len+j].position.x = -tempDist;
     }
     cup[len+j].position.y = 7.5;
     cup[len+j].position.z = 0;
@@ -150,7 +142,7 @@ function createNewCup(diff)
 
 function newEnvironment(call)
 {
-  if(score > 10)
+  if(score == 3)
   {
     cupsTotal += 2;
     createNewCup(2);
@@ -158,7 +150,7 @@ function newEnvironment(call)
   }
   if(score % 3 == 0)
   {
-    speed += 2;
+    speed += 0.5;
   }
   call();
 }
@@ -178,7 +170,8 @@ function makeScoreBoard()
   outputplane.material.emissiveColor = new BABYLON.Color3(1, 1, 1);
   outputplane.material.backFaceCulling = false;
   // outputplaneTexture.getContext().clearRect(0, 140, 512, 512);
-  outputplaneTexture.drawText("Score: " + score, null, 180, "bold 120px verdana", "white");
+  outputplaneTexture.drawText("Score: " + score, null, 180, "bold 60px verdana", "white");
+  // outputplaneTexture.drawText(text, null, 180, "bold 60px verdana", "white");
 
   outputplaneTexture.hasAlpha = true;
 }
@@ -215,7 +208,7 @@ function clickable(cup, ball, scene)
         {
           alert('Wrong Cup');
           alert('Your Final score is: ' + score);
-          alert('Thank You for Playing!');
+          alert('Thank You for Playing! Press R to restart');
         }
       }, 1000);
     }));

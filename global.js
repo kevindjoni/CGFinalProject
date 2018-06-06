@@ -8,3 +8,4 @@ var tempDist = 0;
 var speed = 3;
 var outputplane;
 var outputplaneTexture;
+var pause = false;

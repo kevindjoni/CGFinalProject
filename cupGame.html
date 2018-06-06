@@ -17,6 +17,7 @@
 
   document.addEventListener("DOMContentLoaded", function()
   {
+    // window.alert('Guess the correct Cup with the ball');
     canvas = document.getElementById("renderCanvas");
     engine = new BABYLON.Engine(canvas, true);
     scene = new BABYLON.Scene(engine);
@@ -32,9 +33,17 @@
 
     camera.attachControl(canvas, true);
 
-    var light = new BABYLON.HemisphericLight("hLight",
+    var light = new BABYLON.PointLight("pLight",
     new BABYLON.Vector3(0, 90, 0), scene);
-    light.intensity = 10;
+    light.intensity = 1;
+
+    // var light1 = new BABYLON.HemisphericLight("hLight",
+    // new BABYLON.Vector3(0, 90, 0), scene);
+    // light1.intensity = 2.5;
+
+    // var ground = BABYLON.Mesh.CreatePlane('ground', 1000, scene);
+    // ground.material = new BABYLON.ShadowOnlyMaterial('shadowOnly', scene);
+    // ground.receiveShadows = true
 
     var table = createMat(scene);
     var cabin = BABYLON.MeshBuilder.CreateBox("cabin", 1.0, scene);
@@ -59,6 +68,8 @@
         cabin.position = (new BABYLON.Vector3(0, -98.5, 0));
         cabin.rotation.y = -(Math.PI/2);
         cabin.scaling = new BABYLON.Vector3(100, 100, 100);
+        cabin.scaling.x = 125;
+        cabin.backFaceCulling = true;
       }
     });
 
@@ -75,9 +86,22 @@
       shuffleCup(cup, shuffleNumber, ball, cupDist, scene);
     });
 
-    engine.runRenderLoop(function()
+    engine.runRenderLoop(run = function()
     {
-      scene.render();
+      window.onkeydown = function(event)
+      {
+        if(event.keyCode == 27)
+        {
+          if(window.alert("Game is Paused - Press OK to continue"))
+          {}
+        }
+        else if(event.keyCode == 82 || event.keyCode == 114)
+        {
+          console.log('here');
+          location.reload();
+        }
+      }
+      if(!pause){scene.render();}
     });
   });
 </script>
