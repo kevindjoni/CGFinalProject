@@ -10,7 +10,7 @@ Exporter version: 5.6.3, Blender version: 2.79 (sub 0)
 		Mat Weight Precision:  2
 		texture directory   :  C:\Users\User\Desktop\GitKraken\CGFinalProject\
 	Python World class constructor completed
-	processing begun of camera (UniversalCamera):  Camera
+	WARNING: No active camera has been assigned, or is not in a currently selected Blender layer
 	processing begun of mesh:  InsideShed.001
 		processing begun of Standard material:  Material.002
 			Diffuse texture found "Texture.002"
@@ -50,4 +50,4 @@ Exporter version: 5.6.3, Blender version: 2.79 (sub 0)
 ========= Writing of scene file started =========
 ========= Writing of scene file completed =========
 ========= end of processing =========
-elapsed time:  0 min, 1.0453 secs
+elapsed time:  0 min, 1.2886 secs

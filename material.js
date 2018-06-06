@@ -31,7 +31,6 @@ function cupMat(scene)
     var mat = new BABYLON.StandardMaterial("material", scene);
 
     mat.diffuseColor = new BABYLON.Color3(0,0,1);
-        // mat.diffuseColor = new BABYLON.Color3(220,220,220);
     mat.specularColor = new BABYLON.Color3(0,1,1);
     mat.specularPower = 25;
 
