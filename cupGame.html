@@ -17,12 +17,23 @@
 
   document.addEventListener("DOMContentLoaded", function()
   {
-    // window.alert('Guess the correct Cup with the ball');
+    window.alert('Guess the correct Cup with the ball');
     canvas = document.getElementById("renderCanvas");
     engine = new BABYLON.Engine(canvas, true);
     scene = new BABYLON.Scene(engine);
 
     engine.enableOfflineSupport = false;
+
+    var skybox = BABYLON.Mesh.CreateBox("skyBox", 2000.0, scene);
+
+    var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+    skyboxMaterial.backFaceCulling = false;
+    skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+    skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+    skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("skybox", scene);
+    skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+
+    skybox.material = skyboxMaterial;
 
     camera = new BABYLON.ArcRotateCamera("camera", 0, 0, 10, new
     BABYLON.Vector3(0, 0, 0), scene)
