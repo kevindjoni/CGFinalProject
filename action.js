@@ -142,7 +142,7 @@ function createNewCup(diff)
 
 function newEnvironment(call)
 {
-  if(score = 10)
+  if(score == 10)
   {
     alert("More Cups!");
     cupsTotal += 2;
@@ -311,15 +311,25 @@ function shuffleCup(cup, shuffleNumber, ball, length, scene)
 
   if(shuffleNumber > 0)
   {
-    switchCup(cup[len1], cup[len2], ball, scene, function() {
-      shuffleNumber--;
-      console.log(shuffleNumber);
-      shuffleCup(cup, shuffleNumber, ball, length, scene);
+    soundEffect();
+
+    switchCup(cup[len1], cup[len2], ball, scene, function()
+    {
+    shuffleNumber--;
+    console.log(shuffleNumber);
+    shuffleCup(cup, shuffleNumber, ball, length, scene);
     });
-  } else {
+  }
+  else
+  {
     ball.visibility = 1;
     ball.position = cup[cupWithBall].position.clone();
     ball.position.y = 3;
     clickable(cup,ball,scene);
   }
+}
+
+function soundEffect()
+{
+  var sound = new BABYLON.Sound("sound", "soundEffect.mp3", scene, null, {loop: false, autoplay: true});
 }
