@@ -312,7 +312,6 @@ function shuffleCup(cup, shuffleNumber, ball, length, scene)
   if(shuffleNumber > 0)
   {
     soundEffect();
-
     switchCup(cup[len1], cup[len2], ball, scene, function()
     {
     shuffleNumber--;
