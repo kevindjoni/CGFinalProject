@@ -1,3 +1,4 @@
+//Kevin Djoni
 function liftCup(cup, goDown, scene, callfunction)
 {
   var animationBox = new BABYLON.Animation(
@@ -111,6 +112,7 @@ function hideCup(cup,ball,scene,callback)
   }
 }
 
+//Steve Vinsensius Jo
 function disableClicking(cup,scene)
 {
   for(var i= 0; i< cup.length;i++)
@@ -276,6 +278,7 @@ function cupRotation(cup, posCup, movement, scene, back)
   scene.beginAnimation(cup, 0, 60,false, speed, back);
 }
 
+//Steve Jo || Kevin Djoni
 function switchCup(cup1, cup2, ball, scene, callfunction)
 {
   ball.visibility = 0;
@@ -328,6 +331,7 @@ function shuffleCup(cup, shuffleNumber, ball, length, scene)
   }
 }
 
+//Kevin Djoni
 function soundEffect()
 {
   var sound = new BABYLON.Sound("sound", "soundEffect.mp3", scene, null, {loop: false, autoplay: true});

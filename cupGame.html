@@ -24,6 +24,7 @@
 
     engine.enableOfflineSupport = false;
 
+    //Devin Christian
     var skybox = BABYLON.Mesh.CreateBox("skyBox", 4000, scene);
 
     var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
@@ -34,6 +35,7 @@
     skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
     skybox.material = skyboxMaterial;
 
+    //Kevin Djoni
     camera = new BABYLON.UniversalCamera("camera",
     new BABYLON.Vector3(0, 90, 225), scene)
     camera.setTarget(new BABYLON.Vector3.Zero());
@@ -78,6 +80,7 @@
     var ball = new BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 6}, scene);
 
     createCup();
+    //Steve Vinsensius Jo
     makeScoreBoard();
 
     ball.position = cup[cupWithBall].position.clone();
@@ -89,6 +92,7 @@
       shuffleCup(cup, shuffleNumber, ball, cupDist, scene);
     });
 
+    //Devin Christian
     engine.runRenderLoop(run = function()
     {
       window.onkeydown = function(event)

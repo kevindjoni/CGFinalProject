@@ -1,3 +1,4 @@
+//Steve Jo || Kevin Djoni
 var cupsTotal = 3; // Number of Cups (can be changed later)
 var cupDist = 25 // Distance between cups.
 var shuffleNumber = 5; // Number of times cup shuffle

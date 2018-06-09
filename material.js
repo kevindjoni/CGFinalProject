@@ -1,3 +1,4 @@
+//Steve Jo || Kevin Djoni
 function createMat(scene)
 {
   var mat = new BABYLON.StandardMaterial("material", scene);
